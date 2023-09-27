@@ -1,22 +1,21 @@
-export class IronRock {
-    constructor(ctx, x) {
+export class Ingot {
+    constructor(ctx, ix, iy, x, y) {
         this.ctx = ctx;
         this.image = document.getElementById("OreSpritesheet");
-        this.ix = 96;
-        this.iy = 0;
+        this.ix = ix;
+        this.iy = iy;
         this.w = 32;
         this.h = 32;
         this.x = x;
-        this.y = 800;
-        this.sw = 128;
-        this.sh = 128;
+        this.y = y;
+        this.sw = 140;
+        this.sh = 140;
+
         this.hidden = true;
     }
 
-    update() {
-        if (this.hidden) {
-            return;
-        }
+    update(tick) {
+
     }
 
     draw() {
@@ -34,13 +33,5 @@ export class IronRock {
             this.sw,
             this.sh
         );
-    }
-
-    hide() {
-        this.hidden = true;
-    }
-
-    show() {
-        this.hidden = false;
     }
 }

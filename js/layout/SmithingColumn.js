@@ -1,5 +1,5 @@
-import { Ingot } from "../model/Ingot.js";
-import { Anvil } from "../model/Anvil.js";
+import { Ingot } from "../component/Ingot.js";
+import { Anvil } from "../component/Anvil.js";
 import { Hammer } from "../tools/Hammer.js";
 
 export class SmithingColumn {
@@ -54,21 +54,14 @@ export class SmithingColumn {
         this.ironHammer = new Hammer(ctx, ironX - 160, ironY - 80);
     }
 
-    update() {
-        this.tinHammer.update();
-        this.copperHammer.update();
-        this.bronzeHammer.update();
-        this.ironHammer.update();
+    update(tick) {
+        this.tinHammer.update(tick);
+        this.copperHammer.update(tick);
+        this.bronzeHammer.update(tick);
+        this.ironHammer.update(tick);
     }
 
     draw() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.x, this.y, this.w, this.h);
-
-        this.ctx.font = "50pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText("Smithing", this.titleX, this.titleY);
-
         this.anvilTop.draw();
         this.anvilBottom.draw();
 
@@ -83,33 +76,12 @@ export class SmithingColumn {
         this.ironHammer.draw();
     }
 
-    /*
-    drawTopFurnance() {
-        this.ctx.drawImage(
-            document.getElementById("OreSpritesheet"),
-            0,
-            420,
-            64,
-            96,
-            this.furnanceX,
-            this.furnanceTopY,
-            192,
-            288
-        );
-    }
+    drawBackground() {
+        this.ctx.fillStyle = this.color;
+        this.ctx.fillRect(this.x, this.y, this.w, this.h);
 
-    drawBottomFurnance() {
-        this.ctx.drawImage(
-            document.getElementById("OreSpritesheet"),
-            0,
-            420,
-            64,
-            96,
-            this.furnanceX,
-            this.furnanceBottomY,
-            192,
-            288
-        );
+        this.ctx.font = "50pt Arial";
+        this.ctx.fillStyle = "black";
+        this.ctx.fillText("Smithing", this.titleX, this.titleY);
     }
-    */
 }

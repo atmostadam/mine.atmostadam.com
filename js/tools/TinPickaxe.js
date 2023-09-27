@@ -1,7 +1,12 @@
-import { GameCache } from "../persistence/GameCache.js";
+import { InventoryDecorator } from "../decorator/InventoryDecorator.js";
+import { between } from "../main.js";
 
 export class TinPickaxe {
     constructor(ctx, x) {
+        if (!TinPickaxe.instance) {
+            TinPickaxe.instance = this;
+        }
+
         this.ctx = ctx;
         this.image = document.getElementById("Pickaxe");
         this.ix = 0;
@@ -13,17 +18,20 @@ export class TinPickaxe {
         this.sw = 128;
         this.sh = 128;
 
-        this.speed = 3;
+        this.payoutTicks = 120;
+        this.tick = 0;
+
+        this.speed = 6;
 
         this.minX = this.x - 5;
         this.minY = this.y - 5;
         this.maxX = this.x + 150;
         this.maxY = this.y + 150;
 
-        GameCache.setClass(this);
-
         this.goingUp = true;
         this.hidden = true;
+
+        return TinPickaxe.instance;
     }
 
     update() {
@@ -43,6 +51,11 @@ export class TinPickaxe {
             this.y > this.maxY) {
             this.goingUp = !this.goingUp;
         }
+        if (this.tick > this.payoutTicks) {
+            this.hidden = true;
+            this.tick = 0;
+        }
+        this.tick++;
     }
 
     draw() {
@@ -70,7 +83,17 @@ export class TinPickaxe {
         this.hidden = false;
     }
 
-    onClick() {
-        this.hidden = false;
+    onClick(x, y) {
+        if (between(x, 1350, 1475) && between(y, 200, 330)) {
+            this.hidden = false;
+        }
+    }
+
+    payout() {
+        return 1;
+    }
+
+    static getInstance() {
+        return TinPickaxe.instance;
     }
 }

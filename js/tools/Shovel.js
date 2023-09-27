@@ -19,7 +19,7 @@ export class Shovel {
         this.maxY = this.y + 150;
 
         this.goingUp = true;
-        this.hidden = false;
+        this.hidden = true;
     }
 
     update() {

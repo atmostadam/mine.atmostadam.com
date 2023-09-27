@@ -6,10 +6,11 @@ import { MarketColumn } from "./layout/MarketColumn.js";
 import { Footer } from "./layout/Footer.js";
 import { Header } from "./layout/Header.js";
 import { GameCache } from "./persistence/GameCache.js";
-import { Gamer } from "./persistence/Gamer.js";
-import { Currency } from "./persistence/Currency.js";
-import { Inventory } from "./persistence/Inventory.js";
+import { Currency } from "./model/Currency.js";
+import { Inventory } from "./model/Inventory.js";
 import { MouseListener } from "./listener/MouseListener.js"
+import { InventoryDecorator } from "./decorator/InventoryDecorator.js"
+import { CurrencyDecorator } from "./decorator/CurrencyDecorator.js"
 
 export class Mine {
     constructor(canvas, ctx) {
@@ -17,11 +18,14 @@ export class Mine {
         this.ctx = ctx;
 
         new GameCache(canvas, ctx);
-        GameCache.set("Gamer", new Gamer());
-        GameCache.set("Currency", new Currency(0, 0, 0));
-        GameCache.set("Inventory", new Inventory());
+        //GameCache.set("Gamer", new Gamer());
+        //GameCache.set("Currency", new Currency(0, 0, 0));
+        //GameCache.set("Inventory", new Inventory());
 
         new MouseListener();
+
+        new InventoryDecorator(new Inventory(0, 0, 0, 0, 0, 0, 0, 0));
+        new CurrencyDecorator(new Currency(0, 0, 0));
 
         const margin = 5;
 
@@ -40,22 +44,26 @@ export class Mine {
         const bodyWidthFourFifths = bodyWidthOneFifth * 4;
 
         this.header = new Header(ctx, bodyWidth, headerSize, margin, margin);
-        this.market = new MarketColumn(ctx, margin, bodyY, bodyWidthOneFifth, bodyHeight, GameCache.COLOR_RED);
-        this.smithing = new SmithingColumn(ctx, margin + bodyWidthOneFifth, bodyY, bodyWidthOneFifth, bodyHeight, GameCache.COLOR_GREEN);
-        this.smelting = new SmeltingColumn(ctx, margin + bodyWidthTwoFifths, bodyY, bodyWidthOneFifth, bodyHeight, GameCache.COLOR_PURPLE);
-        this.mining = new MiningColumn(ctx, margin + bodyWidthThreeFifths, bodyY, bodyWidthOneFifth, bodyHeight, GameCache.COLOR_BLUE);
-        this.inventory = new InventoryColumn(ctx, margin + bodyWidthFourFifths, bodyY, bodyWidthOneFifth, bodyHeight, GameCache.COLOR_ORANGE);
+        this.market = new MarketColumn(ctx, margin, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
+        this.smithing = new SmithingColumn(ctx, margin + bodyWidthOneFifth, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
+        this.smelting = new SmeltingColumn(ctx, margin + bodyWidthTwoFifths, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
+        this.mining = new MiningColumn(ctx, margin + bodyWidthThreeFifths, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
+        this.inventory = new InventoryColumn(ctx, margin + bodyWidthFourFifths, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
         this.footer = new Footer(ctx, bodyWidth, footerSize, margin, canvas.height - margin - footerSize);
+
+        this.tick = 0;
     }
 
     update() {
-        this.mining.update();
-        this.smelting.update();
-        this.smithing.update();
-        this.market.update();
-        this.inventory.update();
-        this.header.update();
-        this.footer.update();
+        this.tick++;
+        this.drawBackground();
+        this.mining.update(this.tick);
+        this.smelting.update(this.tick);
+        this.smithing.update(this.tick);
+        this.market.update(this.tick);
+        this.inventory.update(this.tick);
+        this.header.update(this.tick);
+        this.footer.update(this.tick);
     }
 
     draw() {
@@ -66,5 +74,15 @@ export class Mine {
         this.inventory.draw();
         this.header.draw();
         this.footer.draw();
+    }
+
+    drawBackground() {
+        this.mining.drawBackground();
+        this.smelting.drawBackground();
+        this.smithing.drawBackground();
+        this.market.drawBackground();
+        this.inventory.drawBackground();
+        this.header.drawBackground();
+        this.footer.drawBackground();
     }
 }

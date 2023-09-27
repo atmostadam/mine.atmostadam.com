@@ -1,7 +1,7 @@
-import { IronRock } from "../model/IronRock.js"
-import { TinRock } from "../model/TinRock.js"
-import { CopperRock } from "../model/CopperRock.js"
-import { BronzeRock } from "../model/BronzeRock.js"
+import { IronRock } from "../component/IronRock.js"
+import { TinRock } from "../component/TinRock.js"
+import { CopperRock } from "../component/CopperRock.js"
+import { BronzeRock } from "../component/BronzeRock.js"
 import { IronPickaxe } from "../tools/IronPickaxe.js"
 import { TinPickaxe } from "../tools/TinPickaxe.js"
 import { CopperPickaxe } from "../tools/CopperPickaxe.js"
@@ -33,26 +33,19 @@ export class MiningColumn {
         this.ironPickaxe = new IronPickaxe(ctx, rockX - 180);
     }
 
-    update() {
-        this.tinRock.update();
-        this.copperRock.update();
-        this.bronzeRock.update();
-        this.ironRock.update();
+    update(tick) {
+        this.tinRock.update(tick);
+        this.copperRock.update(tick);
+        this.bronzeRock.update(tick);
+        this.ironRock.update(tick);
 
-        this.tinPickaxe.update();
-        this.copperPickaxe.update();
-        this.bronzePickaxe.update();
-        this.ironPickaxe.update();
+        this.tinPickaxe.update(tick);
+        this.copperPickaxe.update(tick);
+        this.bronzePickaxe.update(tick);
+        this.ironPickaxe.update(tick);
     }
 
     draw() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.x, this.y, this.w, this.h);
-
-        this.ctx.font = "50pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText("Mining", this.titleX, this.titleY);
-
         this.tinRock.draw();
         this.copperRock.draw();
         this.bronzeRock.draw();
@@ -62,5 +55,14 @@ export class MiningColumn {
         this.copperPickaxe.draw();
         this.bronzePickaxe.draw();
         this.ironPickaxe.draw();
+    }
+
+    drawBackground() {
+        this.ctx.fillStyle = this.color;
+        this.ctx.fillRect(this.x, this.y, this.w, this.h);
+
+        this.ctx.font = "50pt Arial";
+        this.ctx.fillStyle = "black";
+        this.ctx.fillText("Mining", this.titleX, this.titleY);
     }
 }

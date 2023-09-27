@@ -10,10 +10,11 @@ export class BronzeRock {
         this.y = 600;
         this.sw = 128;
         this.sh = 128;
+
         this.hidden = true;
     }
 
-    update() {
+    update(tick) {
         if (this.hidden) {
             return;
         }

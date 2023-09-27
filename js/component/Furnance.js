@@ -14,10 +14,10 @@ export class Furnance {
         this.tick = 0;
         this.ticksPerImage = 30;
 
-        this.hidden = false;
+        this.hidden = true;
     }
 
-    update() {
+    update(tick) {
         if (this.hidden) {
             return;
         }

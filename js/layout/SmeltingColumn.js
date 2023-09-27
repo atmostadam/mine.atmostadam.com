@@ -1,6 +1,6 @@
 import { Shovel } from "../tools/Shovel.js";
-import { Furnance } from "../model/Furnance.js";
-import { Ore } from "../model/Ore.js";
+import { Furnance } from "../component/Furnance.js";
+import { Ore } from "../component/Ore.js";
 
 export class SmeltingColumn {
     constructor(ctx, x, y, w, h, color) {
@@ -54,29 +54,22 @@ export class SmeltingColumn {
         this.ironShovel = new Shovel(ctx, ironX - 150, ironY + 150);
     }
 
-    update() {
-        this.furnanceTop.update();
-        this.furnanceBottom.update();
+    update(tick) {
+        this.furnanceTop.update(tick);
+        this.furnanceBottom.update(tick);
 
-        this.tin.update();
-        this.copper.update();
-        this.bronze.update();
-        this.iron.update();
+        this.tin.update(tick);
+        this.copper.update(tick);
+        this.bronze.update(tick);
+        this.iron.update(tick);
 
-        this.tinShovel.update();
-        this.copperShovel.update();
-        this.bronzeShovel.update();
-        this.ironShovel.update();
+        this.tinShovel.update(tick);
+        this.copperShovel.update(tick);
+        this.bronzeShovel.update(tick);
+        this.ironShovel.update(tick);
     }
 
     draw() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.x, this.y, this.w, this.h);
-
-        this.ctx.font = "50pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText("Smelting", this.titleX, this.titleY);
-
         this.furnanceTop.draw();
         this.furnanceBottom.draw();
 
@@ -89,5 +82,14 @@ export class SmeltingColumn {
         this.copperShovel.draw();
         this.bronzeShovel.draw();
         this.ironShovel.draw();
+    }
+
+    drawBackground() {
+        this.ctx.fillStyle = this.color;
+        this.ctx.fillRect(this.x, this.y, this.w, this.h);
+
+        this.ctx.font = "50pt Arial";
+        this.ctx.fillStyle = "black";
+        this.ctx.fillText("Smelting", this.titleX, this.titleY);
     }
 }

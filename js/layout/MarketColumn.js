@@ -1,5 +1,5 @@
-import { Counter } from "../model/Counter.js"
-import { Shopkeep } from "../model/Shopkeep.js"
+import { Counter } from "../component/Counter.js"
+import { Shopkeep } from "../component/Shopkeep.js"
 
 export class MarketColumn {
     constructor(ctx, x, y, w, h, color) {
@@ -37,18 +37,17 @@ export class MarketColumn {
         this.shopkeep = new Shopkeep(ctx, this.shopkeepX, this.shopkeepY);
     }
 
-    update() {
+    update(tick) {
+        this.counterLeft.update(tick);
+        this.counterMiddleLeft.update(tick);
+        this.counterMiddle.update(tick);
+        this.counterMiddleRight.update(tick);
+        this.counterRight.update(tick);
 
+        this.shopkeep.update(tick);
     }
 
     draw() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.x, this.y, this.w, this.h);
-
-        this.ctx.font = "50pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText("Marketing", this.titleX, this.titleY);
-
         this.counterLeft.draw();
         this.counterMiddleLeft.draw();
         this.counterMiddle.draw();
@@ -56,5 +55,14 @@ export class MarketColumn {
         this.counterRight.draw();
 
         this.shopkeep.draw();
+    }
+
+    drawBackground() {
+        this.ctx.fillStyle = this.color;
+        this.ctx.fillRect(this.x, this.y, this.w, this.h);
+
+        this.ctx.font = "50pt Arial";
+        this.ctx.fillStyle = "black";
+        this.ctx.fillText("Marketing", this.titleX, this.titleY);
     }
 }

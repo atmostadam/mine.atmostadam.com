@@ -1,3 +1,6 @@
+import { CurrencyDecorator } from "../decorator/CurrencyDecorator.js"
+import { InventoryDecorator } from "../decorator/InventoryDecorator.js"
+
 export class InventoryColumn {
     constructor(ctx, x, y, w, h, color) {
         this.ctx = ctx;
@@ -25,21 +28,24 @@ export class InventoryColumn {
         this.goldCoinTextY = this.goldCoinY + 38;
     }
 
-    update() {
+    update(tick) {
 
     }
 
     draw() {
+        this.drawCopperCoins();
+        this.drawSilverCoins();
+        this.drawGoldCoins();
+        this.drawTinOre();
+    }
+
+    drawBackground() {
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x, this.y, this.w, this.h);
 
         this.ctx.font = "50pt Arial";
         this.ctx.fillStyle = "black";
         this.ctx.fillText("Inventory", this.titleX, this.titleY);
-
-        this.drawCopperCoins();
-        this.drawSilverCoins();
-        this.drawGoldCoins();
     }
 
     drawCopperCoins() {
@@ -56,7 +62,7 @@ export class InventoryColumn {
         );
         this.ctx.font = "32pt Arial";
         this.ctx.fillStyle = "black";
-        this.ctx.fillText("100", this.coinTextX, this.copperCoinTextY);
+        this.ctx.fillText(CurrencyDecorator.getCopperCoins(), this.coinTextX, this.copperCoinTextY);
     }
 
     drawSilverCoins() {
@@ -73,7 +79,7 @@ export class InventoryColumn {
         );
         this.ctx.font = "32pt Arial";
         this.ctx.fillStyle = "black";
-        this.ctx.fillText("10", this.coinTextX, this.silverCoinTextY);
+        this.ctx.fillText(CurrencyDecorator.getCopperCoins(), this.coinTextX, this.silverCoinTextY);
     }
 
     drawGoldCoins() {
@@ -90,6 +96,23 @@ export class InventoryColumn {
         );
         this.ctx.font = "32pt Arial";
         this.ctx.fillStyle = "black";
-        this.ctx.fillText("1", this.coinTextX, this.goldCoinTextY);
+        this.ctx.fillText(CurrencyDecorator.getCopperCoins(), this.coinTextX, this.goldCoinTextY);
+    }
+
+    drawTinOre() {
+        this.ctx.drawImage(
+            document.getElementById("OreSpritesheet"),
+            64,
+            288,
+            32,
+            32,
+            this.coinX,
+            this.goldCoinY + 50,
+            48,
+            48
+        );
+        this.ctx.font = "32pt Arial";
+        this.ctx.fillStyle = "black";
+        this.ctx.fillText(InventoryDecorator.getTinOre(), this.coinTextX, this.goldCoinTextY + 50);
     }
 }

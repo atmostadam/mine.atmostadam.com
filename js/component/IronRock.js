@@ -1,19 +1,19 @@
-export class CopperRock {
+export class IronRock {
     constructor(ctx, x) {
         this.ctx = ctx;
         this.image = document.getElementById("OreSpritesheet");
-        this.ix = 32;
+        this.ix = 96;
         this.iy = 0;
         this.w = 32;
         this.h = 32;
         this.x = x;
-        this.y = 400;
+        this.y = 800;
         this.sw = 128;
         this.sh = 128;
         this.hidden = true;
     }
 
-    update() {
+    update(tick) {
         if (this.hidden) {
             return;
         }

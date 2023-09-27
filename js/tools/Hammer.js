@@ -19,7 +19,7 @@ export class Hammer {
         this.maxY = this.y + 90;
 
         this.movingTowards = true;
-        this.hidden = false;
+        this.hidden = true;
     }
 
     update() {

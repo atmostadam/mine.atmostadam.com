@@ -1,7 +1,7 @@
-export class Anvil {
+export class Shopkeep {
     constructor(ctx, x, y) {
         this.ctx = ctx
-        this.image = document.getElementById("Anvil");
+        this.image = document.getElementById("BlueFlameShopkeep");
         this.ix = 0;
         this.iy = 0;
         this.w = 64;
@@ -10,13 +10,18 @@ export class Anvil {
         this.y = y;
         this.sw = 192;
         this.sh = 192;
+
+        this.hidden = true;
     }
 
-    update() {
+    update(tick) {
 
     }
 
     draw() {
+        if (this.hidden) {
+            return;
+        }
         this.ctx.drawImage(
             this.image,
             this.ix,
