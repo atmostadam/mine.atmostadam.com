@@ -1,4 +1,4 @@
-export class Ingot {
+export class Ore {
     constructor(ctx, ix, iy, x, y) {
         this.ctx = ctx;
         this.image = document.getElementById("OreSpritesheet");
@@ -8,8 +8,8 @@ export class Ingot {
         this.h = 32;
         this.x = x;
         this.y = y;
-        this.sw = 140;
-        this.sh = 140;
+        this.sw = 128;
+        this.sh = 128;
     }
 
     update() {

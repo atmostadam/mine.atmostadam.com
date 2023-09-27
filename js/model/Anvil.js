@@ -1,15 +1,15 @@
-export class Ingot {
-    constructor(ctx, ix, iy, x, y) {
-        this.ctx = ctx;
-        this.image = document.getElementById("OreSpritesheet");
-        this.ix = ix;
-        this.iy = iy;
-        this.w = 32;
-        this.h = 32;
+export class Anvil {
+    constructor(ctx, x, y) {
+        this.ctx = ctx
+        this.image = document.getElementById("Anvil");
+        this.ix = 0;
+        this.iy = 0;
+        this.w = 64;
+        this.h = 64;
         this.x = x;
         this.y = y;
-        this.sw = 140;
-        this.sh = 140;
+        this.sw = 192;
+        this.sh = 192;
     }
 
     update() {

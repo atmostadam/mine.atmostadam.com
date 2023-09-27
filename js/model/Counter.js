@@ -1,15 +1,19 @@
-export class Rock {
-    constructor(ctx, ix, iy, w, h, x, y, sw, sh) {
-        this.ctx = ctx;
-        this.image = document.getElementById("MineSpritesheet");
+export class Counter {
+    constructor(ctx, ix, iy, x, y) {
+        this.ctx = ctx
+        this.image = document.getElementById("InteriorTileset");
         this.ix = ix;
         this.iy = iy;
-        this.w = w;
-        this.h = h;
+        this.w = 48;
+        this.h = 48;
         this.x = x;
         this.y = y;
-        this.sw = sw;
-        this.sh = sh;
+        this.sw = 96;
+        this.sh = 96;
+    }
+
+    update() {
+
     }
 
     draw() {

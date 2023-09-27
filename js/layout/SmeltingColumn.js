@@ -1,5 +1,6 @@
-import { Ingot } from "../model/Ingot.js"
-import { Furnance } from "../model/Furnance.js"
+import { Shovel } from "../tools/Shovel.js";
+import { Furnance } from "../model/Furnance.js";
+import { Ore } from "../model/Ore.js";
 
 export class SmeltingColumn {
     constructor(ctx, x, y, w, h, color) {
@@ -19,33 +20,53 @@ export class SmeltingColumn {
         const furnanceTopY = this.y + 60;
         const furnanceBottomY = this.y + 440;
 
-        const tinIX = 32;
-        const tinIY = 348;
+        const tinIX = 64;
+        const tinIY = 288;
         const tinX = this.x + halfWidth - 150;
-        const tinY = this.y + 320;
+        const tinY = this.y + 350;
 
         const copperIX = 96;
-        const copperIY = 348;
+        const copperIY = 288;
         const copperX = this.x + halfWidth + 20;
-        const copperY = this.y + 320;
+        const copperY = this.y + 350;
 
-        const bronzeIX = 192;
-        const bronzeIY = 348;
+        const bronzeIX = 160;
+        const bronzeIY = 288;
         const bronzeX = this.x + halfWidth - 150;
-        const bronzeY = this.y + 700;
+        const bronzeY = this.y + 730;
 
         const ironIX = 128;
-        const ironIY = 348;
+        const ironIY = 288;
         const ironX = this.x + halfWidth + 20;
-        const ironY = this.y + 700;
+        const ironY = this.y + 730;
 
         this.furnanceTop = new Furnance(ctx, furnanceX, furnanceTopY);
         this.furnanceBottom = new Furnance(ctx, furnanceX, furnanceBottomY);
 
-        this.tin = new Ingot(ctx, tinIX, tinIY, tinX, tinY);
-        this.copper = new Ingot(ctx, copperIX, copperIY, copperX, copperY);
-        this.bronze = new Ingot(ctx, bronzeIX, bronzeIY, bronzeX, bronzeY);
-        this.iron = new Ingot(ctx, ironIX, ironIY, ironX, ironY);
+        this.tin = new Ore(ctx, tinIX, tinIY, tinX, tinY);
+        this.copper = new Ore(ctx, copperIX, copperIY, copperX, copperY);
+        this.bronze = new Ore(ctx, bronzeIX, bronzeIY, bronzeX, bronzeY);
+        this.iron = new Ore(ctx, ironIX, ironIY, ironX, ironY);
+
+        this.tinShovel = new Shovel(ctx, tinX - 150, tinY + 150);
+        this.copperShovel = new Shovel(ctx, copperX - 150, copperY + 150);
+        this.bronzeShovel = new Shovel(ctx, bronzeX - 150, bronzeY + 150);
+        this.ironShovel = new Shovel(ctx, ironX - 150, ironY + 150);
+    }
+
+    update() {
+        this.furnanceTop.update();
+        this.furnanceBottom.update();
+
+        this.tin.update();
+        this.copper.update();
+        this.bronze.update();
+        this.iron.update();
+
+        this.tinShovel.update();
+        this.copperShovel.update();
+        this.bronzeShovel.update();
+        this.ironShovel.update();
     }
 
     draw() {
@@ -59,40 +80,14 @@ export class SmeltingColumn {
         this.furnanceTop.draw();
         this.furnanceBottom.draw();
 
-        this.copper.draw();
         this.tin.draw();
+        this.copper.draw();
         this.bronze.draw();
         this.iron.draw();
 
+        this.tinShovel.draw();
+        this.copperShovel.draw();
+        this.bronzeShovel.draw();
+        this.ironShovel.draw();
     }
-
-    /*
-    drawTopFurnance() {
-        this.ctx.drawImage(
-            document.getElementById("OreSpritesheet"),
-            0,
-            420,
-            64,
-            96,
-            this.furnanceX,
-            this.furnanceTopY,
-            192,
-            288
-        );
-    }
-
-    drawBottomFurnance() {
-        this.ctx.drawImage(
-            document.getElementById("OreSpritesheet"),
-            0,
-            420,
-            64,
-            96,
-            this.furnanceX,
-            this.furnanceBottomY,
-            192,
-            288
-        );
-    }
-    */
 }

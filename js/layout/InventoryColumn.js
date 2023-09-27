@@ -25,6 +25,10 @@ export class InventoryColumn {
         this.goldCoinTextY = this.goldCoinY + 38;
     }
 
+    update() {
+
+    }
+
     draw() {
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x, this.y, this.w, this.h);

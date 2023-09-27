@@ -9,3 +9,5 @@ Credits
 5. StonesRocksGemsSpritesheet.png -> <https://opengameart.org/users/senmou>
 6. ./images/cainos/* -> <https://cainos.itch.io/pixel-art-icon-pack-rpg>
 7. anvil-gray-64x64.png -> Created by nightowl, Momentmal, & Jordan Irwin (AntumDeluge)
+8. Interior48x48.png -> Credit ("Gif") with Twitter : @gif_not_jif
+9. ./images/ninja/* -> Made by Pixel-Boy and AAA
