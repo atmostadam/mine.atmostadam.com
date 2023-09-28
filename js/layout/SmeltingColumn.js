@@ -88,6 +88,18 @@ export class SmeltingColumn {
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x, this.y, this.w, this.h);
 
+        this.ctx.drawImage(
+            document.getElementById("FlameBackground"),
+            0,
+            0,
+            910,
+            1213,
+            this.x,
+            this.y,
+            this.w,
+            this.h
+        );
+
         this.ctx.font = "50pt Arial";
         this.ctx.fillStyle = "black";
         this.ctx.fillText("Smelting", this.titleX, this.titleY);

@@ -20,11 +20,10 @@ export class Mine {
         new GameCache(canvas, ctx);
         //GameCache.set("Gamer", new Gamer());
         //GameCache.set("Currency", new Currency(0, 0, 0));
-        //GameCache.set("Inventory", new Inventory());
 
         new MouseListener();
 
-        new InventoryDecorator(new Inventory(0, 0, 0, 0, 0, 0, 0, 0));
+        new InventoryDecorator(new Inventory(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
         new CurrencyDecorator(new Currency(0, 0, 0));
 
         const margin = 5;

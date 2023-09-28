@@ -61,6 +61,18 @@ export class MiningColumn {
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x, this.y, this.w, this.h);
 
+        this.ctx.drawImage(
+            document.getElementById("MineShaftBackground"),
+            0,
+            0,
+            262,
+            375,
+            this.x,
+            this.y,
+            this.w,
+            this.h
+        );
+
         this.ctx.font = "50pt Arial";
         this.ctx.fillStyle = "black";
         this.ctx.fillText("Mining", this.titleX, this.titleY);

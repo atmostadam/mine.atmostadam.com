@@ -80,6 +80,18 @@ export class SmithingColumn {
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x, this.y, this.w, this.h);
 
+        this.ctx.drawImage(
+            document.getElementById("AnvilHammerSpark"),
+            0,
+            0,
+            408,
+            612,
+            this.x,
+            this.y,
+            this.w,
+            this.h
+        );
+
         this.ctx.font = "50pt Arial";
         this.ctx.fillStyle = "black";
         this.ctx.fillText("Smithing", this.titleX, this.titleY);

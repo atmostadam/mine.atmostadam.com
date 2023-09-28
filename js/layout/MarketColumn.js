@@ -61,8 +61,20 @@ export class MarketColumn {
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x, this.y, this.w, this.h);
 
+        this.ctx.drawImage(
+            document.getElementById("Market"),
+            0,
+            0,
+            242,
+            421,
+            this.x,
+            this.y,
+            this.w,
+            this.h
+        );
+
         this.ctx.font = "50pt Arial";
         this.ctx.fillStyle = "black";
-        this.ctx.fillText("Marketing", this.titleX, this.titleY);
+        this.ctx.fillText("Market", this.titleX, this.titleY);
     }
 }

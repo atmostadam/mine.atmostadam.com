@@ -1,13 +1,21 @@
 export class Inventory {
-    constructor(tinOre, copperOre, bronzeOre, ironOre,
-        tinIngot, copperIngot, bronzeIngot, ironIngot) {
+    constructor(tinOre, copperOre, ironOre, tinIngots, copperIngots, bronzeIngots, ironIngots,
+        tinWeapons, tinArmor, copperWeapons, copperArmor, bronzeWeapons, bronzeArmor,
+        ironWeapons, ironArmor) {
         this.tinOre = tinOre;
         this.copperOre = copperOre;
-        this.bronzeOre = bronzeOre;
         this.ironOre = ironOre;
-        this.tinIngot = tinIngot;
-        this.copperIngot = copperIngot;
-        this.bronzeIngot = bronzeIngot;
-        this.ironIngot = ironIngot;
+        this.tinIngots = tinIngots;
+        this.copperIngots = copperIngots;
+        this.bronzeIngots = bronzeIngots;
+        this.ironIngots = ironIngots;
+        this.tinWeapons = tinWeapons;
+        this.tinArmor = tinArmor;
+        this.copperWeapons = copperWeapons;
+        this.copperArmor = copperArmor;
+        this.bronzeWeapons = bronzeWeapons;
+        this.bronzeArmor = bronzeArmor;
+        this.ironWeapons = ironWeapons;
+        this.ironArmor = ironArmor;
     }
 }
