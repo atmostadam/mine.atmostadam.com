@@ -1,5 +1,8 @@
-export class Anvil {
-    constructor(ctx, x, y) {
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js";
+
+export class Anvil extends BaseHiddenDrawing {
+    constructor(hidden, ctx, x, y) {
+        super(hidden);
         this.ctx = ctx
         this.image = document.getElementById("Anvil");
         this.ix = 0;
@@ -10,8 +13,6 @@ export class Anvil {
         this.y = y;
         this.sw = 192;
         this.sh = 192;
-
-        this.hidden = true;
     }
 
     update(tick) {

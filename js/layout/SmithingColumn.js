@@ -1,9 +1,11 @@
 import { Ingot } from "../component/Ingot.js";
 import { Anvil } from "../component/Anvil.js";
 import { Hammer } from "../tools/Hammer.js";
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js"
 
-export class SmithingColumn {
-    constructor(ctx, x, y, w, h, color) {
+export class SmithingColumn extends BaseHiddenDrawing {
+    constructor(ctx, hidden, x, y, w, h, color) {
+        super(hidden);
         this.ctx = ctx;
         this.color = color;
         this.h = h;
@@ -40,8 +42,8 @@ export class SmithingColumn {
         const ironX = this.x + halfWidth + 20;
         const ironY = this.y + 450;
 
-        this.anvilTop = new Anvil(ctx, anvilX, anvilTopY);
-        this.anvilBottom = new Anvil(ctx, anvilX, anvilBottomY);
+        this.anvilTop = new Anvil(true, ctx, anvilX, anvilTopY);
+        this.anvilBottom = new Anvil(true, ctx, anvilX, anvilBottomY);
 
         this.tin = new Ingot(ctx, tinIX, tinIY, tinX, tinY);
         this.copper = new Ingot(ctx, copperIX, copperIY, copperX, copperY);

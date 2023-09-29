@@ -1,7 +1,6 @@
 export class HiddenStateStaticHandler {
-    constructor(previousState) {
+    constructor() {
         HiddenStateStaticHandler.state = new Map();
-        previousState.foreach((k, v) => { HiddenStateStaticHandler.state.set(k, v) });
     }
 
     static show(className) {
@@ -13,9 +12,9 @@ export class HiddenStateStaticHandler {
     }
 
     static isHidden(className) {
-        if (!HiddenStateStaticHandler.state.has(className)) {
+        if (!(HiddenStateStaticHandler.state.has(className))) {
             HiddenStateStaticHandler.state.set(className, true);
         }
-        return HiddenStateStaticHandler.state.get(classname);
+        return HiddenStateStaticHandler.state.get(className);
     }
 }

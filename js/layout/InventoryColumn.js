@@ -1,8 +1,10 @@
-import { CurrencyDecorator } from "../decorator/CurrencyDecorator.js"
-import { InventoryDecorator } from "../decorator/InventoryDecorator.js"
+import { CurrencyDecorator } from "../decorator/CurrencyDecorator.js";
+import { InventoryDecorator } from "../decorator/InventoryDecorator.js";
+import { BaseDrawing } from "../base/BaseDrawing.js";
 
-export class InventoryColumn {
+export class InventoryColumn extends BaseDrawing {
     constructor(ctx, x, y, w, h, color) {
+        super();
         this.ctx = ctx;
         this.color = color;
         this.h = h;

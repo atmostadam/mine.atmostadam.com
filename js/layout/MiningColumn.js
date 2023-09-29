@@ -6,9 +6,11 @@ import { IronPickaxe } from "../tools/IronPickaxe.js"
 import { TinPickaxe } from "../tools/TinPickaxe.js"
 import { CopperPickaxe } from "../tools/CopperPickaxe.js"
 import { BronzePickaxe } from "../tools/BronzePickaxe.js"
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js"
 
-export class MiningColumn {
-    constructor(ctx, x, y, w, h, color) {
+export class MiningColumn extends BaseHiddenDrawing {
+    constructor(ctx, hidden, x, y, w, h, color) {
+        super(hidden);
         this.ctx = ctx;
         this.color = color;
         this.h = h;

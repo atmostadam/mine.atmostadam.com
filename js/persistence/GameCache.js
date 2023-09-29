@@ -39,7 +39,11 @@ export class GameCache {
         return GameCache.ctx;
     }
 
-    static getCanvas() {
-        return GameCache.canvas;
+    static getWidth() {
+        return GameCache.canvas.width;
+    }
+
+    static getHeight() {
+        return GameCache.canvas.height;
     }
 }

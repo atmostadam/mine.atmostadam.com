@@ -1,8 +1,10 @@
-import { Counter } from "../component/Counter.js"
-import { Shopkeep } from "../component/Shopkeep.js"
+import { Counter } from "../component/Counter.js";
+import { Shopkeep } from "../component/Shopkeep.js";;
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js"
 
-export class MarketColumn {
-    constructor(ctx, x, y, w, h, color) {
+export class MarketColumn extends BaseHiddenDrawing {
+    constructor(ctx, hidden, x, y, w, h, color) {
+        super(hidden);
         this.ctx = ctx;
         this.color = color;
         this.h = h;

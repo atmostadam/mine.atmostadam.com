@@ -1,9 +1,11 @@
 import { Shovel } from "../tools/Shovel.js";
 import { Furnance } from "../component/Furnance.js";
 import { Ore } from "../component/Ore.js";
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js"
 
-export class SmeltingColumn {
-    constructor(ctx, x, y, w, h, color) {
+export class SmeltingColumn extends BaseHiddenDrawing {
+    constructor(ctx, hidden, x, y, w, h, color) {
+        super(hidden);
         this.ctx = ctx;
         this.color = color;
         this.h = h;

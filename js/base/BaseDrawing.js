@@ -15,4 +15,9 @@ export class BaseDrawing {
     draw() {
         throw new GameDeveloperException("This method is ABSTRACT. Subclass MUST override draw()");
     }
+
+    fillBackground(color, x, y, w, h) {
+        this.ctx.fillStyle = color;
+        this.ctx.fillRect(x, y, w, h);
+    }
 }

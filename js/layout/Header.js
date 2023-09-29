@@ -1,5 +1,8 @@
-export class Header {
+import { BaseDrawing } from "../base/BaseDrawing.js";
+
+export class Header extends BaseDrawing {
     constructor(ctx, w, h, x, y) {
+        super();
         this.ctx = ctx;
         this.color = "#add8e6";
         this.w = w;
@@ -13,11 +16,7 @@ export class Header {
     }
 
     draw() {
+        this.fillBackground(this.color, this.x, this.y, this.w, this.h);
 
-    }
-
-    drawBackground() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.x, this.y, this.w, this.h);
     }
 }
