@@ -1,6 +1,13 @@
-export class Hammer {
-    constructor(ctx, x, y) {
-        this.ctx = ctx;
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js";
+
+export class Hammer extends BaseHiddenDrawing {
+    constructor(x, y) {
+        super();
+
+        if (!Hammer.instance) {
+            Hammer.instance = this;
+        }
+
         this.image = document.getElementById("Hammer");
         this.ix = 0;
         this.iy = 0;
@@ -20,6 +27,8 @@ export class Hammer {
 
         this.movingTowards = true;
         this.hidden = true;
+
+        return Hammer.instance;
     }
 
     update() {
@@ -58,11 +67,11 @@ export class Hammer {
         );
     }
 
-    hide() {
-        this.hidden = true;
+    static unlock() {
+        this.getInstance().show();
     }
 
-    show() {
-        this.hidden = false;
+    static getInstance() {
+        return Hammer.instance;
     }
 }

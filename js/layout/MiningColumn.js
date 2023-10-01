@@ -1,17 +1,15 @@
-import { IronRock } from "../component/IronRock.js"
-import { TinRock } from "../component/TinRock.js"
-import { CopperRock } from "../component/CopperRock.js"
-import { BronzeRock } from "../component/BronzeRock.js"
-import { IronPickaxe } from "../tools/IronPickaxe.js"
-import { TinPickaxe } from "../tools/TinPickaxe.js"
-import { CopperPickaxe } from "../tools/CopperPickaxe.js"
-import { BronzePickaxe } from "../tools/BronzePickaxe.js"
-import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js"
+import { IronRock } from "../component/IronRock.js";
+import { TinRock } from "../component/TinRock.js";
+import { CopperRock } from "../component/CopperRock.js";
+import { IronPickaxe } from "../tools/IronPickaxe.js";
+import { TinPickaxe } from "../tools/TinPickaxe.js";
+import { CopperPickaxe } from "../tools/CopperPickaxe.js";
+import { BaseDrawing } from "../base/BaseDrawing.js";
 
-export class MiningColumn extends BaseHiddenDrawing {
-    constructor(ctx, hidden, x, y, w, h, color) {
-        super(hidden);
-        this.ctx = ctx;
+export class MiningColumn extends BaseDrawing {
+    constructor(x, y, w, h, color) {
+        super();
+
         this.color = color;
         this.h = h;
         this.x = x;
@@ -24,46 +22,41 @@ export class MiningColumn extends BaseHiddenDrawing {
         this.titleX = this.x + halfWidth - 100;
         this.titleY = this.y + 55;
 
-        this.tinRock = new TinRock(ctx, rockX);
-        this.copperRock = new CopperRock(ctx, rockX);
-        this.bronzeRock = new BronzeRock(ctx, rockX);
-        this.ironRock = new IronRock(ctx, rockX);
+        this.tinRock = new TinRock(rockX);
+        this.copperRock = new CopperRock(rockX);
+        this.ironRock = new IronRock(rockX);
 
-        this.tinPickaxe = new TinPickaxe(ctx, rockX - 180);
-        this.copperPickaxe = new CopperPickaxe(ctx, rockX - 180);
-        this.bronzePickaxe = new BronzePickaxe(ctx, rockX - 180);
-        this.ironPickaxe = new IronPickaxe(ctx, rockX - 180);
+        this.tinPickaxe = new TinPickaxe(rockX - 180);
+        this.copperPickaxe = new CopperPickaxe(rockX - 180);
+        this.ironPickaxe = new IronPickaxe(rockX - 180);
     }
 
     update(tick) {
         this.tinRock.update(tick);
         this.copperRock.update(tick);
-        this.bronzeRock.update(tick);
         this.ironRock.update(tick);
 
         this.tinPickaxe.update(tick);
         this.copperPickaxe.update(tick);
-        this.bronzePickaxe.update(tick);
         this.ironPickaxe.update(tick);
     }
 
     draw() {
+        this.fillBackground(this.color, this.x, this.y, this.w, this.h);
+        this.drawBackground();
+        this.drawText("Mining", "32pt Arial", "black", this.titleX + 50, this.titleY - 20);
+
         this.tinRock.draw();
         this.copperRock.draw();
-        this.bronzeRock.draw();
         this.ironRock.draw();
 
         this.tinPickaxe.draw();
         this.copperPickaxe.draw();
-        this.bronzePickaxe.draw();
         this.ironPickaxe.draw();
     }
 
     drawBackground() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.x, this.y, this.w, this.h);
-
-        this.ctx.drawImage(
+        this.drawImage(
             document.getElementById("MineShaftBackground"),
             0,
             0,
@@ -74,9 +67,13 @@ export class MiningColumn extends BaseHiddenDrawing {
             this.w,
             this.h
         );
+    }
 
-        this.ctx.font = "50pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText("Mining", this.titleX, this.titleY);
+    static unlock() {
+        this.getInstance().show();
+    }
+
+    static getInstance() {
+        return MiningColumn.instance;
     }
 }

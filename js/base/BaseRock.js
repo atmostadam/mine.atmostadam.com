@@ -1,23 +1,19 @@
-export class BronzeRock {
-    constructor(ctx, x) {
-        this.ctx = ctx;
+import { BaseClickable } from "./BaseClickable.js";
+import { GameDeveloperException } from "../exception/GameDeveloperException.js";
+
+export class BaseRock extends BaseClickable {
+    constructor() {
+        super();
+
         this.image = document.getElementById("OreSpritesheet");
-        this.ix = 64;
-        this.iy = 0;
         this.w = 32;
         this.h = 32;
-        this.x = x;
-        this.y = 600;
         this.sw = 128;
         this.sh = 128;
-
-        this.hidden = true;
     }
 
     update(tick) {
-        if (this.hidden) {
-            return;
-        }
+        this.stillLocked();
     }
 
     draw() {
@@ -37,11 +33,7 @@ export class BronzeRock {
         );
     }
 
-    hide() {
-        this.hidden = true;
-    }
-
-    show() {
-        this.hidden = false;
+    stillLocked() {
+        throw new GameDeveloperException("This method is ABSTRACT. Subclass MUST override stillLocked()");
     }
 }

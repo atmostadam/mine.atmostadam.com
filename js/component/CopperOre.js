@@ -1,15 +1,15 @@
-import { BaseRock } from "../base/BaseRock.js";
+import { BaseOre } from "../base/BaseOre.js";
 import { InventoryDecorator } from "../decorator/InventoryDecorator.js";
 
-export class CopperRock extends BaseRock {
-    constructor(x) {
-        super(32, 0, x, 400);
+export class CopperOre extends BaseOre {
+    constructor(ix, iy, x, y) {
+        super(ix, iy, x, y);
 
-        if (!CopperRock.instance) {
-            CopperRock.instance = this;
+        if (!CopperOre.instance) {
+            CopperOre.instance = this;
         }
 
-        return CopperRock.instance;
+        return CopperOre.instance;
     }
 
     draw() {
@@ -19,18 +19,20 @@ export class CopperRock extends BaseRock {
         this.drawImageLoaded();
     }
 
+    /*
     stillLocked() {
         if (InventoryDecorator.getTinWeapons() > this.unhideAtTinWeapons) {
             this.hidden = false;
         }
         return this.hidden;
     }
+    */
 
     static unlock() {
-        this.getInstance().show();
+        this.instance.hidden = false;
     }
 
     static getInstance() {
-        return CopperRock.instance;
+        return this.instance;
     }
 }

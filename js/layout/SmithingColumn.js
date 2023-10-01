@@ -1,12 +1,19 @@
-import { Ingot } from "../component/Ingot.js";
 import { Anvil } from "../component/Anvil.js";
 import { Hammer } from "../tools/Hammer.js";
 import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js"
+import { TinIngot } from "../component/TinIngot.js";
+import { CopperIngot } from "../component/CopperIngot.js";
+import { BronzeIngot } from "../component/BronzeIngot.js";
+import { IronIngot } from "../component/IronIngot.js";
 
 export class SmithingColumn extends BaseHiddenDrawing {
-    constructor(ctx, hidden, x, y, w, h, color) {
-        super(hidden);
-        this.ctx = ctx;
+    constructor(x, y, w, h, color) {
+        super();
+
+        if (!SmithingColumn.instance) {
+            SmithingColumn.instance = this;
+        }
+
         this.color = color;
         this.h = h;
         this.x = x;
@@ -42,18 +49,20 @@ export class SmithingColumn extends BaseHiddenDrawing {
         const ironX = this.x + halfWidth + 20;
         const ironY = this.y + 450;
 
-        this.anvilTop = new Anvil(true, ctx, anvilX, anvilTopY);
-        this.anvilBottom = new Anvil(true, ctx, anvilX, anvilBottomY);
+        this.anvilTop = new Anvil(anvilX, anvilTopY);
+        this.anvilBottom = new Anvil(anvilX, anvilBottomY);
 
-        this.tin = new Ingot(ctx, tinIX, tinIY, tinX, tinY);
-        this.copper = new Ingot(ctx, copperIX, copperIY, copperX, copperY);
-        this.bronze = new Ingot(ctx, bronzeIX, bronzeIY, bronzeX, bronzeY);
-        this.iron = new Ingot(ctx, ironIX, ironIY, ironX, ironY);
+        this.tin = new TinIngot(tinIX, tinIY, tinX, tinY);
+        this.copper = new CopperIngot(copperIX, copperIY, copperX, copperY);
+        this.bronze = new BronzeIngot(bronzeIX, bronzeIY, bronzeX, bronzeY);
+        this.iron = new IronIngot(ironIX, ironIY, ironX, ironY);
 
-        this.tinHammer = new Hammer(ctx, tinX - 160, tinY - 80);
-        this.copperHammer = new Hammer(ctx, copperX - 160, copperY - 80);
-        this.bronzeHammer = new Hammer(ctx, bronzeX - 160, bronzeY - 80);
-        this.ironHammer = new Hammer(ctx, ironX - 160, ironY - 80);
+        this.tinHammer = new Hammer(tinX - 160, tinY - 80);
+        this.copperHammer = new Hammer(copperX - 160, copperY - 80);
+        this.bronzeHammer = new Hammer(bronzeX - 160, bronzeY - 80);
+        this.ironHammer = new Hammer(ironX - 160, ironY - 80);
+
+        return SmithingColumn.instance;
     }
 
     update(tick) {
@@ -97,5 +106,13 @@ export class SmithingColumn extends BaseHiddenDrawing {
         this.ctx.font = "50pt Arial";
         this.ctx.fillStyle = "black";
         this.ctx.fillText("Smithing", this.titleX, this.titleY);
+    }
+
+    static unlock() {
+        this.getInstance().show();
+    }
+
+    static getInstance() {
+        return SmithingColumn.instance;
     }
 }

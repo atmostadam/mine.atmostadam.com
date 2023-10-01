@@ -1,6 +1,13 @@
-export class BronzePickaxe {
-    constructor(ctx, x) {
-        this.ctx = ctx;
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js";
+
+export class BronzePickaxe extends BaseHiddenDrawing {
+    constructor(x) {
+        super();
+
+        if (!BronzePickaxe.instance) {
+            BronzePickaxe.instance = this;
+        }
+
         this.image = document.getElementById("Pickaxe");
         this.ix = 0;
         this.iy = 0;
@@ -20,6 +27,8 @@ export class BronzePickaxe {
 
         this.goingUp = true;
         this.hidden = true;
+
+        return BronzePickaxe.instance;
     }
 
     update() {
@@ -58,11 +67,11 @@ export class BronzePickaxe {
         );
     }
 
-    hide() {
-        this.hidden = true;
+    static unlock() {
+        this.getInstance().show();
     }
 
-    show() {
-        this.hidden = false;
+    static getInstance() {
+        return BronzePickaxe.instance;
     }
 }

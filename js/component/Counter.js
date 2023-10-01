@@ -1,6 +1,13 @@
-export class Counter {
-    constructor(ctx, ix, iy, x, y) {
-        this.ctx = ctx
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js";
+
+export class Counter extends BaseHiddenDrawing {
+    constructor(ix, iy, x, y) {
+        super();
+
+        if (!Counter.instance) {
+            Counter.instance = this;
+        }
+
         this.image = document.getElementById("InteriorTileset");
         this.ix = ix;
         this.iy = iy;
@@ -12,6 +19,8 @@ export class Counter {
         this.sh = 96;
 
         this.hidden = true;
+
+        return Counter.instance;
     }
 
     update(tick) {
@@ -33,5 +42,13 @@ export class Counter {
             this.sw,
             this.sh
         );
+    }
+
+    static unlock() {
+        this.getInstance().show();
+    }
+
+    static getInstance() {
+        return Counter.instance;
     }
 }

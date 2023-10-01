@@ -1,6 +1,13 @@
-export class CopperPickaxe {
-    constructor(ctx, x) {
-        this.ctx = ctx;
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js";
+
+export class CopperPickaxe extends BaseHiddenDrawing {
+    constructor(x) {
+        super();
+
+        if (!CopperPickaxe.instance) {
+            CopperPickaxe.instance = this;
+        }
+
         this.image = document.getElementById("Pickaxe");
         this.ix = 0;
         this.iy = 0;
@@ -20,6 +27,8 @@ export class CopperPickaxe {
 
         this.goingUp = true;
         this.hidden = true;
+
+        return CopperPickaxe.instance;
     }
 
     update() {
@@ -58,11 +67,11 @@ export class CopperPickaxe {
         );
     }
 
-    hide() {
-        this.hidden = true;
+    static unlock() {
+        this.getInstance().show();
     }
 
-    show() {
-        this.hidden = false;
+    static getInstance() {
+        return CopperPickaxe.instance;
     }
 }

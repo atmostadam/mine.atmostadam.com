@@ -1,6 +1,9 @@
-export class Ore {
-    constructor(ctx, ix, iy, x, y) {
-        this.ctx = ctx;
+import { BaseClickable } from "./BaseClickable.js";
+
+export class BaseOre extends BaseClickable {
+    constructor(ix, iy, x, y,) {
+        super();
+
         this.image = document.getElementById("OreSpritesheet");
         this.ix = ix;
         this.iy = iy;
@@ -10,8 +13,6 @@ export class Ore {
         this.y = y;
         this.sw = 128;
         this.sh = 128;
-
-        this.hidden = true;
     }
 
     update(tick) {
@@ -22,7 +23,7 @@ export class Ore {
         if (this.hidden) {
             return;
         }
-        this.ctx.drawImage(
+        this.drawImageLoaded(
             this.image,
             this.ix,
             this.iy,

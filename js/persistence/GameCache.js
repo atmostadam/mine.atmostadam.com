@@ -9,6 +9,9 @@ export class GameCache {
         GameCache.map = new Map();
         GameCache.canvas = canvas;
         GameCache.ctx = ctx;
+
+        GameCache.width = canvas.width;
+        GameCache.height = canvas.height;
     }
 
     static set(key, value) {
@@ -39,11 +42,15 @@ export class GameCache {
         return GameCache.ctx;
     }
 
+    static getCanvas() {
+        return GameCache.canvas;
+    }
+
     static getWidth() {
-        return GameCache.canvas.width;
+        return GameCache.width;
     }
 
     static getHeight() {
-        return GameCache.canvas.height;
+        return GameCache.height;
     }
 }

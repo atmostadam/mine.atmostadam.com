@@ -1,6 +1,13 @@
-export class IronPickaxe {
-    constructor(ctx, x) {
-        this.ctx = ctx;
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js";
+
+export class IronPickaxe extends BaseHiddenDrawing {
+    constructor(x) {
+        super();
+
+        if (!IronPickaxe.instance) {
+            IronPickaxe.instance = this;
+        }
+
         this.image = document.getElementById("Pickaxe");
         this.ix = 0;
         this.iy = 0;
@@ -20,6 +27,8 @@ export class IronPickaxe {
 
         this.goingUp = true;
         this.hidden = true;
+
+        return IronPickaxe.instance;
     }
 
     update() {
@@ -58,11 +67,11 @@ export class IronPickaxe {
         );
     }
 
-    hide() {
-        this.hidden = true;
+    static unlock() {
+        this.getInstance().show();
     }
 
-    show() {
-        this.hidden = false;
+    static getInstance() {
+        return IronPickaxe.instance;
     }
 }

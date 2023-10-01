@@ -1,46 +1,36 @@
-export class IronRock {
-    constructor(ctx, x) {
-        this.ctx = ctx;
-        this.image = document.getElementById("OreSpritesheet");
-        this.ix = 96;
-        this.iy = 0;
-        this.w = 32;
-        this.h = 32;
-        this.x = x;
-        this.y = 800;
-        this.sw = 128;
-        this.sh = 128;
-        this.hidden = true;
-    }
+import { BaseRock } from "../base/BaseRock.js";
+import { CurrencyDecorator } from "../decorator/CurrencyDecorator.js";
 
-    update(tick) {
-        if (this.hidden) {
-            return;
+export class IronRock extends BaseRock {
+    constructor(x) {
+        super(96, 0, x, 800);
+
+        if (!IronRock.instance) {
+            IronRock.instance = this;
         }
+
+        return IronRock.instance;
     }
 
     draw() {
         if (this.hidden) {
             return;
         }
-        this.ctx.drawImage(
-            this.image,
-            this.ix,
-            this.iy,
-            this.w,
-            this.h,
-            this.x,
-            this.y,
-            this.sw,
-            this.sh
-        );
+        this.drawImageLoaded();
     }
 
-    hide() {
-        this.hidden = true;
+    stillLocked() {
+        if (CurrencyDecorator.getGoldCoins() > this.unhideAtGold) {
+            this.hidden = false;
+        }
+        return this.hidden;
     }
 
-    show() {
-        this.hidden = false;
+    static unlock() {
+        this.getInstance().show();
+    }
+
+    static getInstance() {
+        return IronRock.instance;
     }
 }

@@ -1,22 +1,22 @@
-import { BaseRock } from "../base/BaseRock.js";
+import { BaseIngot } from "../base/BaseIngot.js";
 import { InventoryDecorator } from "../decorator/InventoryDecorator.js";
 
-export class CopperRock extends BaseRock {
-    constructor(x) {
-        super(32, 0, x, 400);
+export class BronzeIngot extends BaseIngot {
+    constructor(ix, iy, x, y) {
+        super(ix, iy, x, y);
 
-        if (!CopperRock.instance) {
-            CopperRock.instance = this;
+        if (!BronzeIngot.instance) {
+            BronzeIngot.instance = this;
         }
 
-        return CopperRock.instance;
+        return BronzeIngot.instance;
     }
 
     draw() {
         if (this.hidden) {
             return;
         }
-        this.drawImageLoaded();
+        drawImageLoaded();
     }
 
     stillLocked() {
@@ -31,6 +31,6 @@ export class CopperRock extends BaseRock {
     }
 
     static getInstance() {
-        return CopperRock.instance;
+        return BronzeIngot.instance;
     }
 }

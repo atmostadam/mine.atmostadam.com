@@ -1,39 +1,40 @@
+import { BaseOre } from "../base/BaseOre.js";
 import { InventoryDecorator } from "../decorator/InventoryDecorator.js";
-import { between } from "../main.js";
-import { BaseRock } from "../base/BaseRock.js";
 
-export class TinRock extends BaseRock {
-    constructor(x) {
-        super();
+export class TinOre extends BaseOre {
+    constructor(ix, iy, x, y) {
+        super(
+            ix,
+            iy,
+            x,
+            y,
+            1000,
+            1200,
+            300,
+            400,
+            0,
+            90,
+            0,
+            false,
+            0,
+            0);
 
-        if (!TinRock.instance) {
-            TinRock.instance = this;
+        if (!TinOre.instance) {
+            TinOre.instance = this;
         }
-
-        this.ix = 128;
-        this.iy = 0;
-        this.x = x;
-        this.y = 200;
 
         this.payout = "1";
 
-        this.payoutTicks = 90;
         this.payoutTextTicks = 20;
-
-        this.ticking = false;
-        this.finalTick = 0;
 
         this.textTicking = false;
         this.finalTextTick = 0;
 
         this.textY = this.y + 10;
 
-        this.clickPower = 0;
-        this.clickMultiplier = 0;
+        this.tinIngotsToUnlock = 1;
 
-        this.tinOreToUnlock = 1;
-
-        return TinRock.instance;
+        return TinOre.instance;
     }
 
     update(tick) {
@@ -55,7 +56,7 @@ export class TinRock extends BaseRock {
             } else {
                 this.ctx.font = "14pt Arial";
                 this.ctx.fillStyle = "green";
-                this.ctx.fillText("+" + this.finalPayout + " Tin Ore", this.x + 50, this.textY);
+                this.ctx.fillText("+" + this.finalPayout + " Tin Ingots", this.x + 50, this.textY);
                 this.textY--;
             }
         }
@@ -86,32 +87,18 @@ export class TinRock extends BaseRock {
         this.drawRectangle(5, color, 1350, 203, 130, 130);
     }
 
-    onClick(x, y) {
-        if (between(x, 1350, 1475) && between(y, 200, 330)) {
-            if (this.finalTick === 0) {
-                this.finalTick = this.tick + this.payoutTicks;
-            }
-            this.ticking = true;
-
-            if (this.clickPower < 50) {
-                this.clickPower++;
-                this.clickMultiplier = 1 + (this.clickPower * .1);
-            }
-        }
-    }
-
-    static canUnlock(tinOre) {
-        if (this.instance.tinOreToUnlock < tinOre) {
+    static canUnlock(tinIngots) {
+        if (this.instance.tinIngotsToUnlock < tinIngots) {
             return true;
         }
         return false;
     }
 
     static unlock() {
-        this.instance.hidden = false;
+        TinOre.instance.hidden = false;
     }
 
     static getInstance() {
-        return this.instance;
+        return TinOre.instance;
     }
 }

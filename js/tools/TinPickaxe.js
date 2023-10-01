@@ -1,13 +1,14 @@
-import { InventoryDecorator } from "../decorator/InventoryDecorator.js";
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js";
 import { between } from "../main.js";
 
-export class TinPickaxe {
-    constructor(ctx, x) {
+export class TinPickaxe extends BaseHiddenDrawing {
+    constructor(x) {
+        super();
+
         if (!TinPickaxe.instance) {
             TinPickaxe.instance = this;
         }
 
-        this.ctx = ctx;
         this.image = document.getElementById("Pickaxe");
         this.ix = 0;
         this.iy = 0;
@@ -75,14 +76,6 @@ export class TinPickaxe {
         );
     }
 
-    hide() {
-        this.hidden = true;
-    }
-
-    show() {
-        this.hidden = false;
-    }
-
     onClick(x, y) {
         if (between(x, 1350, 1475) && between(y, 200, 330)) {
             this.hidden = false;
@@ -91,6 +84,10 @@ export class TinPickaxe {
 
     payout() {
         return 1;
+    }
+
+    static unlock() {
+        this.getInstance().show();
     }
 
     static getInstance() {

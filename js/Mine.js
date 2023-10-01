@@ -12,6 +12,7 @@ import { MouseListener } from "./listener/MouseListener.js";
 import { InventoryDecorator } from "./decorator/InventoryDecorator.js";
 import { CurrencyDecorator } from "./decorator/CurrencyDecorator.js";
 import { HiddenStateStaticHandler } from "./handler/HiddenStateStaticHandler.js";
+import { ScrollingTextHandler } from "./handler/ScrollingTextHandler.js";
 
 export class Mine {
     constructor(canvas, ctx) {
@@ -21,6 +22,7 @@ export class Mine {
         new GameCache(canvas, ctx);
 
         new HiddenStateStaticHandler();
+        new ScrollingTextHandler();
 
         new MouseListener();
 
@@ -43,20 +45,19 @@ export class Mine {
         const bodyWidthThreeFifths = bodyWidthOneFifth * 3;
         const bodyWidthFourFifths = bodyWidthOneFifth * 4;
 
-        this.header = new Header(ctx, bodyWidth, headerSize, margin, margin);
-        this.market = new MarketColumn(ctx, true, margin, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
-        this.smithing = new SmithingColumn(ctx, true, margin + bodyWidthOneFifth, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
-        this.smelting = new SmeltingColumn(ctx, true, margin + bodyWidthTwoFifths, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
-        this.mining = new MiningColumn(ctx, true, margin + bodyWidthThreeFifths, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
-        this.inventory = new InventoryColumn(ctx, margin + bodyWidthFourFifths, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
-        this.footer = new Footer(ctx, bodyWidth, footerSize, margin, canvas.height - margin - footerSize);
+        this.header = new Header(bodyWidth, headerSize, margin, margin);
+        this.market = new MarketColumn(margin, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
+        this.smithing = new SmithingColumn(margin + bodyWidthOneFifth, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
+        this.smelting = new SmeltingColumn(margin + bodyWidthTwoFifths, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
+        this.mining = new MiningColumn(margin + bodyWidthThreeFifths, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
+        this.inventory = new InventoryColumn(margin + bodyWidthFourFifths, bodyY, bodyWidthOneFifth, bodyHeight, "#add8e6");
+        this.footer = new Footer(bodyWidth, footerSize, margin, canvas.height - margin - footerSize);
 
         this.tick = 0;
     }
 
     update() {
         this.tick++;
-        this.drawBackground();
         this.mining.update(this.tick);
         this.smelting.update(this.tick);
         this.smithing.update(this.tick);
@@ -72,16 +73,6 @@ export class Mine {
         this.smithing.draw();
         this.market.draw();
         this.inventory.draw();
-        this.header.draw();
-        this.footer.draw();
-    }
-
-    drawBackground() {
-        this.mining.drawBackground();
-        this.smelting.drawBackground();
-        this.smithing.drawBackground();
-        this.market.drawBackground();
-        this.inventory.drawBackground();
         this.header.draw();
         this.footer.draw();
     }

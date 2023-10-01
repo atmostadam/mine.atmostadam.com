@@ -1,9 +1,25 @@
+import { TinRock } from "../component/TinRock.js";
+import { SmeltingColumn } from "../layout/SmeltingColumn.js";
+import { Furnance } from "../component/Furnance.js";
+import { TinOre } from "../component/TinOre.js";
+import { TinIngot } from "../component/TinIngot.js";
+import { SmithingColumn } from "../layout/SmithingColumn.js";
+import { Anvil } from "../component/Anvil.js";
+
 export class InventoryDecorator {
     constructor(inventory) {
         if (!InventoryDecorator.instance) {
             InventoryDecorator.instance = this;
         }
         this.inventory = inventory;
+
+        this.tinSmeltingLocked = true;
+        this.tinSmithingLocked = true;
+
+        this.tinIngotsUnlocked = false;
+        this.tinWeaponsUnlocked = false;
+        this.tinArmorUnlocked = false;
+
         return InventoryDecorator.instance;
     }
 
@@ -13,10 +29,36 @@ export class InventoryDecorator {
 
     static addTinOre(amount) {
         this.instance.inventory.tinOre += amount;
+        if (this.instance.tinSmeltingLocked &&
+            TinRock.canUnlock(this.instance.inventory.tinOre)) {
+            TinOre.unlock();
+            SmeltingColumn.unlock();
+            Furnance.unlock();
+            this.instance.tinSmeltingLocked = false;
+        }
     }
 
     static removeTinOre(amount) {
         this.instance.inventory.tinOre -= amount;
+    }
+
+    static getTinIngots() {
+        return this.instance.inventory.tinIngots;
+    }
+
+    static addTinIngots(amount) {
+        this.instance.inventory.tinIngots += amount;
+        if (this.instance.tinSmithingLocked &&
+            TinOre.canUnlock(this.instance.inventory.tinIngots)) {
+            TinIngot.unlock();
+            SmithingColumn.unlock();
+            Anvil.unlock();
+            this.instance.tinSmithingLocked = false;
+        }
+    }
+
+    static removeTinIngots(amount) {
+        this.instance.inventory.tinIngots -= amount;
     }
 
     static getCopperOre() {
@@ -41,18 +83,6 @@ export class InventoryDecorator {
 
     static removeIronOre(amount) {
         this.instance.inventory.ironOre -= amount;
-    }
-
-    static getTinIngots() {
-        return this.instance.inventory.tinIngots;
-    }
-
-    static addTinIngots(amount) {
-        this.instance.inventory.tinIngots += amount;
-    }
-
-    static removeTinIngots(amount) {
-        this.instance.inventory.tinIngots -= amount;
     }
 
     static getCopperIngots() {
@@ -188,6 +218,6 @@ export class InventoryDecorator {
     }
 
     static getInstance() {
-        return this.instance;
+        return InventoryDecorator.instance;
     }
 }

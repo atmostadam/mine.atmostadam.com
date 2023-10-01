@@ -1,15 +1,15 @@
-import { BaseRock } from "../base/BaseRock.js";
+import { BaseOre } from "../base/BaseOre.js";
 import { InventoryDecorator } from "../decorator/InventoryDecorator.js";
 
-export class CopperRock extends BaseRock {
-    constructor(x) {
-        super(32, 0, x, 400);
+export class IronOre extends BaseOre {
+    constructor(ix, iy, x, y) {
+        super(ix, iy, x, y);
 
-        if (!CopperRock.instance) {
-            CopperRock.instance = this;
+        if (!IronOre.instance) {
+            IronOre.instance = this;
         }
 
-        return CopperRock.instance;
+        return IronOre.instance;
     }
 
     draw() {
@@ -31,6 +31,6 @@ export class CopperRock extends BaseRock {
     }
 
     static getInstance() {
-        return CopperRock.instance;
+        return IronOre.instance;
     }
 }

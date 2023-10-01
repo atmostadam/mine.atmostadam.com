@@ -1,6 +1,7 @@
 import { GameCache } from "./../persistence/GameCache.js";
 import { TinRock } from "./../component/TinRock.js";
 import { TinPickaxe } from "./../tools/TinPickaxe.js";
+import { TinOre } from "../component/TinOre.js";
 
 export class MouseListener {
     constructor() {
@@ -9,7 +10,7 @@ export class MouseListener {
             var x = e.clientX - rect.left;
             var y = e.clientY - rect.top;
             TinRock.getInstance().onClick(x, y);
-            TinPickaxe.getInstance().onClick(x, y);
+            TinOre.getInstance().onClick(x, y);
         });
     }
 }

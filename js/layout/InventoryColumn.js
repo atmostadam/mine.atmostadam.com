@@ -3,9 +3,9 @@ import { InventoryDecorator } from "../decorator/InventoryDecorator.js";
 import { BaseDrawing } from "../base/BaseDrawing.js";
 
 export class InventoryColumn extends BaseDrawing {
-    constructor(ctx, x, y, w, h, color) {
+    constructor(x, y, w, h, color) {
         super();
-        this.ctx = ctx;
+
         this.color = color;
         this.h = h;
         this.x = x;
@@ -43,6 +43,10 @@ export class InventoryColumn extends BaseDrawing {
     draw() {
         var coinW = 365;
         var coinH = 40;
+
+        this.fillBackground(this.color, this.x, this.y, this.w, this.h);
+        this.drawBackground();
+        this.drawText("Inventory", "32pt Arial", "black", this.titleX + 50, this.titleY - 20);
 
         this.drawCoin(document.getElementById("CopperCoin"), CurrencyDecorator.getCopperCoins(),
             this.coinX, this.copperCoinY, coinW, coinH);
@@ -82,10 +86,7 @@ export class InventoryColumn extends BaseDrawing {
     }
 
     drawBackground() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.x, this.y, this.w, this.h);
-
-        this.ctx.drawImage(
+        this.drawImage(
             document.getElementById("Backpack"),
             0,
             0,
@@ -96,10 +97,6 @@ export class InventoryColumn extends BaseDrawing {
             this.w,
             this.h
         );
-
-        this.ctx.font = "32pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText("Inventory", this.titleX + 50, this.titleY - 20);
     }
 
     drawCoin(image, amount, x, y, w, h) {

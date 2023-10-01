@@ -1,6 +1,13 @@
-export class Shovel {
-    constructor(ctx, x, y) {
-        this.ctx = ctx;
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js";
+
+export class Shovel extends BaseHiddenDrawing {
+    constructor(x, y) {
+        super();
+
+        if (!Shovel.instance) {
+            Shovel.instance = this;
+        }
+
         this.image = document.getElementById("Shovel");
         this.ix = 0;
         this.iy = 0;
@@ -20,6 +27,8 @@ export class Shovel {
 
         this.goingUp = true;
         this.hidden = true;
+
+        return Shovel.instance;
     }
 
     update() {
@@ -58,11 +67,11 @@ export class Shovel {
         );
     }
 
-    hide() {
-        this.hidden = true;
+    static unlock() {
+        this.getInstance().show();
     }
 
-    show() {
-        this.hidden = false;
+    static getInstance() {
+        return Shovel.instance;
     }
 }

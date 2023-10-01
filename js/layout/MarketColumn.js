@@ -3,14 +3,18 @@ import { Shopkeep } from "../component/Shopkeep.js";;
 import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js"
 
 export class MarketColumn extends BaseHiddenDrawing {
-    constructor(ctx, hidden, x, y, w, h, color) {
-        super(hidden);
-        this.ctx = ctx;
-        this.color = color;
-        this.h = h;
+    constructor(x, y, w, h, color) {
+        super();
+
+        if (!MarketColumn.instance) {
+            MarketColumn.instance = this;
+        }
+
         this.x = x;
         this.y = y;
         this.w = w;
+        this.h = h;
+        this.color = color;
 
         const halfWidth = this.w / 2;
 
@@ -27,19 +31,25 @@ export class MarketColumn extends BaseHiddenDrawing {
         const counterMiddleLeftX = this.w - 288;
         const counterLeftX = this.w - 380;
 
-        this.counterRight = new Counter(ctx, counterIX, counterIY, counterRightX, counterY);
-        this.counterMiddleRight = new Counter(ctx, counterIX, counterIY, counterMiddleRightX, counterY);
-        this.counterMiddle = new Counter(ctx, counterIX, counterIY, counterMiddleX, counterY);
-        this.counterMiddleLeft = new Counter(ctx, counterIX, counterIY, counterMiddleLeftX, counterY);
-        this.counterLeft = new Counter(ctx, counterIX + 48, counterIY, counterLeftX, counterY);
+        this.counterRight = new Counter(counterIX, counterIY, counterRightX, counterY);
+        this.counterMiddleRight = new Counter(counterIX, counterIY, counterMiddleRightX, counterY);
+        this.counterMiddle = new Counter(counterIX, counterIY, counterMiddleX, counterY);
+        this.counterMiddleLeft = new Counter(counterIX, counterIY, counterMiddleLeftX, counterY);
+        this.counterLeft = new Counter(counterIX + 48, counterIY, counterLeftX, counterY);
 
         this.shopkeepX = halfWidth - 45;
         this.shopkeepY = this.y + 60;
 
-        this.shopkeep = new Shopkeep(ctx, this.shopkeepX, this.shopkeepY);
+        this.shopkeep = new Shopkeep(this.shopkeepX, this.shopkeepY);
+
+        return MarketColumn.instance;
     }
 
     update(tick) {
+        if (this.hidden) {
+            return;
+        }
+
         this.counterLeft.update(tick);
         this.counterMiddleLeft.update(tick);
         this.counterMiddle.update(tick);
@@ -50,6 +60,14 @@ export class MarketColumn extends BaseHiddenDrawing {
     }
 
     draw() {
+        if (this.hidden) {
+            return;
+        }
+
+        this.fillBackground(this.color, this.x, this.y, this.w, this.h);
+        this.drawBackground();
+        this.drawText("Market", "50pt Arial", "black", this.titleX, this.titleY);
+
         this.counterLeft.draw();
         this.counterMiddleLeft.draw();
         this.counterMiddle.draw();
@@ -60,10 +78,7 @@ export class MarketColumn extends BaseHiddenDrawing {
     }
 
     drawBackground() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.x, this.y, this.w, this.h);
-
-        this.ctx.drawImage(
+        this.drawImage(
             document.getElementById("Market"),
             0,
             0,
@@ -72,11 +87,14 @@ export class MarketColumn extends BaseHiddenDrawing {
             this.x,
             this.y,
             this.w,
-            this.h
-        );
+            this.h);
+    }
 
-        this.ctx.font = "50pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText("Market", this.titleX, this.titleY);
+    static unlock() {
+        MarketColumn.getInstance().show();
+    }
+
+    static getInstance() {
+        return MarketColumn.instance;
     }
 }

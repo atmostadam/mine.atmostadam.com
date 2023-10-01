@@ -1,6 +1,13 @@
-export class Furnance {
-    constructor(ctx, x, y) {
-        this.ctx = ctx
+import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js";
+
+export class Furnance extends BaseHiddenDrawing {
+    constructor(x, y) {
+        super();
+
+        if (!Furnance.instance) {
+            Furnance.instance = this;
+        }
+
         this.image = document.getElementById("OreSpritesheet");
         this.ix = 0;
         this.iy = 420;
@@ -15,6 +22,8 @@ export class Furnance {
         this.ticksPerImage = 30;
 
         this.hidden = true;
+
+        return Furnance.instance;
     }
 
     update(tick) {
@@ -52,11 +61,11 @@ export class Furnance {
         );
     }
 
-    hide() {
-        this.hidden = false;
+    static unlock() {
+        this.getInstance().show();
     }
 
-    show() {
-        this.hidden = true;
+    static getInstance() {
+        return Furnance.instance;
     }
 }
