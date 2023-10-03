@@ -13,9 +13,13 @@ import { InventoryDecorator } from "./decorator/InventoryDecorator.js";
 import { CurrencyDecorator } from "./decorator/CurrencyDecorator.js";
 import { HiddenStateStaticHandler } from "./handler/HiddenStateStaticHandler.js";
 import { ScrollingTextHandler } from "./handler/ScrollingTextHandler.js";
+import { Log } from "https://atmostadam.github.io/game-library/logger/Log.js";
 
 export class Mine {
     constructor(canvas, ctx) {
+        new Log(true, true);
+        Log.info("Executing prerequiste steps for Game Loop in constructor.", this);
+
         this.canvas = canvas;
         this.ctx = ctx;
 

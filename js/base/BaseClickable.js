@@ -12,6 +12,7 @@ export class BaseClickable extends BaseHiddenDrawing {
         ticking,
         clickPower,
         clickMultiplier) {
+        super();
         this.minClickX = minClickX;
         this.maxClickX = maxClickX;
         this.minClickY = minClickY;
