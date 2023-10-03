@@ -1,5 +1,16 @@
 import { Mine } from "./Mine.js";
+import { GameContext } from "https://atmostadam.github.io/game-library/contextx/GameContext.js";
 
+window.addEventListener("load", function () {
+    const canvas = document.getElementById("game-canvas");
+    const ctx = canvas.getContext("2d");
+
+    while (null == GameContext.getInstance());
+
+    GameContext.set("GameLoop", new Mine(canvas, ctx));
+});
+
+/*
 window.addEventListener("load", function () {
     console.log("Starting Game...");
 
@@ -41,3 +52,4 @@ export function between(n, min, max) {
     }
     return false;
 }
+*/
