@@ -48,7 +48,7 @@ export class Furnance extends BaseHiddenDrawing {
         if (this.hidden) {
             return;
         }
-        this.ctx.drawImage(
+        this.getCtxDecorator().drawImage(
             this.image,
             this.ix,
             this.iy,

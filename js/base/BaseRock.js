@@ -1,7 +1,6 @@
-import { BaseClickable } from "./BaseClickable.js";
-import { GameDeveloperException } from "../exception/GameDeveloperException.js";
+import { BaseHiddenDrawing } from "./BaseHiddenDrawing.js";
 
-export class BaseRock extends BaseClickable {
+export class BaseRock extends BaseHiddenDrawing {
     constructor() {
         super();
 
@@ -12,15 +11,11 @@ export class BaseRock extends BaseClickable {
         this.sh = 128;
     }
 
-    update(tick) {
-        this.stillLocked();
-    }
-
     draw() {
         if (this.hidden) {
             return;
         }
-        this.ctx.drawImage(
+        this.drawImage(
             this.image,
             this.ix,
             this.iy,
@@ -31,9 +26,5 @@ export class BaseRock extends BaseClickable {
             this.sw,
             this.sh
         );
-    }
-
-    stillLocked() {
-        throw new GameDeveloperException("This method is ABSTRACT. Subclass MUST override stillLocked()");
     }
 }

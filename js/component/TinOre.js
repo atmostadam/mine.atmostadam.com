@@ -54,9 +54,13 @@ export class TinOre extends BaseOre {
                 this.finalTextTick = 0;
                 this.textY = this.y + 10;
             } else {
+                /*
                 this.ctx.font = "14pt Arial";
                 this.ctx.fillStyle = "green";
                 this.ctx.fillText("+" + this.finalPayout + " Tin Ingots", this.x + 50, this.textY);
+                */
+                this.getCtxDecorator().drawText("+" + this.finalPayout + " Tin Ingots", "14pt Arial", "green", this.x + 50, this.textY);
+
                 this.textY--;
             }
         }
@@ -67,7 +71,8 @@ export class TinOre extends BaseOre {
     }
 
     draw() {
-        this.fillBackground("white", 1350, 203, 130, 130);
+        this.getCtxDecorator().drawFilledRectangle("white", 1350, 203, 130, 130);
+        /*
         this.drawImage(
             this.image,
             this.ix,
@@ -79,12 +84,14 @@ export class TinOre extends BaseOre {
             this.sw,
             this.sh
         );
+        */
+        this.drawImageLoaded();
         if (this.ticking) {
             var color = "black";
         } else {
             var color = "green";
         }
-        this.drawRectangle(5, color, 1350, 203, 130, 130);
+        this.getCtxDecorator().drawRectangle(5, color, 1350, 203, 130, 130);
     }
 
     static canUnlock(tinIngots) {

@@ -12,6 +12,10 @@ export class IronRock extends BaseRock {
         return IronRock.instance;
     }
 
+    update(tick) {
+
+    }
+
     draw() {
         if (this.hidden) {
             return;

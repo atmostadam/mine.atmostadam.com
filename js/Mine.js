@@ -14,6 +14,14 @@ import { CurrencyDecorator } from "./decorator/CurrencyDecorator.js";
 import { HiddenStateStaticHandler } from "./handler/HiddenStateStaticHandler.js";
 import { ScrollingTextHandler } from "./handler/ScrollingTextHandler.js";
 import { Log } from "https://atmostadam.github.io/game-library/logger/Log.js";
+import { registerGameLoop } from "https://atmostadam.github.io/game-library/gamedev.js";
+import { TinRock } from "./component/TinRock.js";
+import { TinOre } from "./component/TinOre.js";
+
+window.addEventListener("load", function () {
+    const canvas = document.getElementById("game-canvas");
+    registerGameLoop(new Mine(canvas, canvas.getContext("2d")));
+});
 
 export class Mine {
     constructor(canvas, ctx) {
@@ -58,10 +66,13 @@ export class Mine {
         this.footer = new Footer(bodyWidth, footerSize, margin, canvas.height - margin - footerSize);
 
         this.tick = 0;
+
+        GameCache.setClass(new TinRock());
+        GameCache.setClass(new TinOre());
     }
 
-    update() {
-        this.tick++;
+    update(tick) {
+        this.tick = tick;
         this.mining.update(this.tick);
         this.smelting.update(this.tick);
         this.smithing.update(this.tick);

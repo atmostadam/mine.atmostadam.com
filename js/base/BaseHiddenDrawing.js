@@ -1,6 +1,6 @@
-import { BaseDrawing } from "../base/BaseDrawing.js";
+import { Drawing } from "https://atmostadam.github.io/game-library/base/Drawing.js";
 
-export class BaseHiddenDrawing extends BaseDrawing {
+export class BaseHiddenDrawing extends Drawing {
     constructor() {
         super();
         this.hidden = true;

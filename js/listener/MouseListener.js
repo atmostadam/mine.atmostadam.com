@@ -9,8 +9,9 @@ export class MouseListener {
             const rect = GameCache.getCanvas().getBoundingClientRect();
             var x = e.clientX - rect.left;
             var y = e.clientY - rect.top;
-            TinRock.getInstance().onClick(x, y);
-            TinOre.getInstance().onClick(x, y);
+
+            GameCache.get("TinRock").onClick(x, y);
+            GameCache.get("TinOre").onClick(x, y);
         });
     }
 }

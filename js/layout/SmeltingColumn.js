@@ -79,10 +79,10 @@ export class SmeltingColumn extends BaseHiddenDrawing {
             return;
         }
 
-        this.fillBackground("black", this.x, this.y, this.w, this.h);
+        this.getCtxDecorator().drawFilledRectangle("black", this.x, this.y, this.w, this.h);
         this.drawBackground();
 
-        this.drawText("Smelting", "50pt Arial", "black", this.titleX, this.titleY);
+        this.getCtxDecorator().drawText("Smelting", "50pt Arial", "black", this.titleX, this.titleY);
 
         this.furnanceTop.draw();
         this.furnanceBottom.draw();
@@ -97,7 +97,7 @@ export class SmeltingColumn extends BaseHiddenDrawing {
     }
 
     drawBackground() {
-        this.drawImage(
+        this.getCtxDecorator().drawImage(
             document.getElementById("FlameBackground"),
             0,
             0,

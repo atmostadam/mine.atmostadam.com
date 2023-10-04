@@ -12,6 +12,10 @@ export class CopperRock extends BaseRock {
         return CopperRock.instance;
     }
 
+    update(tick) {
+
+    }
+
     draw() {
         if (this.hidden) {
             return;

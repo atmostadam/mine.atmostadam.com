@@ -1,5 +1,5 @@
 import { BaseHiddenDrawing } from "../base/BaseHiddenDrawing.js";
-import { between } from "../main.js";
+import { between } from "https://atmostadam.github.io/game-library/util/MathUtils.js";
 
 export class TinPickaxe extends BaseHiddenDrawing {
     constructor(x) {

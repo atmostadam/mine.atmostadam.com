@@ -4,9 +4,9 @@ import { CopperRock } from "../component/CopperRock.js";
 import { IronPickaxe } from "../tools/IronPickaxe.js";
 import { TinPickaxe } from "../tools/TinPickaxe.js";
 import { CopperPickaxe } from "../tools/CopperPickaxe.js";
-import { BaseDrawing } from "../base/BaseDrawing.js";
+import { Drawing } from "https://atmostadam.github.io/game-library/base/Drawing.js";
 
-export class MiningColumn extends BaseDrawing {
+export class MiningColumn extends Drawing {
     constructor(x, y, w, h, color) {
         super();
 
@@ -42,21 +42,9 @@ export class MiningColumn extends BaseDrawing {
     }
 
     draw() {
-        this.fillBackground(this.color, this.x, this.y, this.w, this.h);
-        this.drawBackground();
-        this.drawText("Mining", "32pt Arial", "black", this.titleX + 50, this.titleY - 20);
+        this.getCtxDecorator().drawFilledRectangle(this.color, this.x, this.y, this.w, this.h);
 
-        this.tinRock.draw();
-        this.copperRock.draw();
-        this.ironRock.draw();
-
-        this.tinPickaxe.draw();
-        this.copperPickaxe.draw();
-        this.ironPickaxe.draw();
-    }
-
-    drawBackground() {
-        this.drawImage(
+        this.getCtxDecorator().drawImage(
             document.getElementById("MineShaftBackground"),
             0,
             0,
@@ -67,13 +55,19 @@ export class MiningColumn extends BaseDrawing {
             this.w,
             this.h
         );
+
+        this.getCtxDecorator().drawText("Mining", "32pt Arial", "black", this.titleX + 50, this.titleY - 20);
+
+        this.tinRock.draw();
+        this.copperRock.draw();
+        this.ironRock.draw();
+
+        this.tinPickaxe.draw();
+        this.copperPickaxe.draw();
+        this.ironPickaxe.draw();
     }
 
     static unlock() {
         this.getInstance().show();
-    }
-
-    static getInstance() {
-        return MiningColumn.instance;
     }
 }

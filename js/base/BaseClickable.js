@@ -1,8 +1,9 @@
 import { BaseHiddenDrawing } from "./BaseHiddenDrawing.js";
-import { between } from "../main.js";
+import { between } from "https://atmostadam.github.io/game-library/util/MathUtils.js";
 
 export class BaseClickable extends BaseHiddenDrawing {
-    constructor(minClickX,
+    constructor(
+        minClickX,
         maxClickX,
         minClickY,
         maxClickY,
@@ -11,7 +12,8 @@ export class BaseClickable extends BaseHiddenDrawing {
         tick,
         ticking,
         clickPower,
-        clickMultiplier) {
+        clickMultiplier
+    ) {
         super();
         this.minClickX = minClickX;
         this.maxClickX = maxClickX;
