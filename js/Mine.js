@@ -5,10 +5,8 @@ import { SmithingColumn } from "./layout/SmithingColumn.js";
 import { MarketColumn } from "./layout/MarketColumn.js";
 import { Footer } from "./layout/Footer.js";
 import { Header } from "./layout/Header.js";
-import { GameCache } from "./persistence/GameCache.js";
 import { Currency } from "./model/Currency.js";
 import { Inventory } from "./model/Inventory.js";
-import { MouseListener } from "./listener/MouseListener.js";
 import { InventoryDecorator } from "./decorator/InventoryDecorator.js";
 import { CurrencyDecorator } from "./decorator/CurrencyDecorator.js";
 import { HiddenStateStaticHandler } from "./handler/HiddenStateStaticHandler.js";
@@ -17,6 +15,7 @@ import { Log } from "https://atmostadam.github.io/game-library/logger/Log.js";
 import { registerGameLoop } from "https://atmostadam.github.io/game-library/gamedev.js";
 import { TinRock } from "./component/TinRock.js";
 import { TinOre } from "./component/TinOre.js";
+import { GameContext } from "https://atmostadam.github.io/game-library/context/GameContext.js";
 
 window.addEventListener("load", function () {
     const canvas = document.getElementById("game-canvas");
@@ -31,12 +30,10 @@ export class Mine {
         this.canvas = canvas;
         this.ctx = ctx;
 
-        new GameCache(canvas, ctx);
+        new GameContext(canvas, ctx);
 
         new HiddenStateStaticHandler();
         new ScrollingTextHandler();
-
-        new MouseListener();
 
         new InventoryDecorator(new Inventory(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
         new CurrencyDecorator(new Currency(0, 0, 0));
@@ -67,8 +64,9 @@ export class Mine {
 
         this.tick = 0;
 
-        GameCache.setClass(new TinRock());
-        GameCache.setClass(new TinOre());
+        GameContext.setClass(new TinRock());
+        GameContext.addClickSubscriber(GameContext.get("TinRock"));
+        GameContext.setClass(new TinOre());
     }
 
     update(tick) {

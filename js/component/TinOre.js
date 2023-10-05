@@ -7,7 +7,9 @@ export class TinOre extends BaseOre {
             ix,
             iy,
             x,
-            y,
+            y
+            );
+            /*
             1000,
             1200,
             300,
@@ -18,6 +20,7 @@ export class TinOre extends BaseOre {
             false,
             0,
             0);
+            */
 
         if (!TinOre.instance) {
             TinOre.instance = this;

@@ -16,7 +16,7 @@ export class BronzeIngot extends BaseIngot {
         if (this.hidden) {
             return;
         }
-        drawImageLoaded();
+        this.drawImageLoaded();
     }
 
     stillLocked() {

@@ -1,8 +1,9 @@
 import { CurrencyDecorator } from "../decorator/CurrencyDecorator.js";
 import { InventoryDecorator } from "../decorator/InventoryDecorator.js";
-import { BaseDrawing } from "../base/BaseDrawing.js";
+import { Drawing } from "https://atmostadam.github.io/game-library/base/Drawing.js";
+import { drawImage, drawText, drawRectangle, drawFilledRectangle } from "https://atmostadam.github.io/game-library/util/DrawingUtils.js";
 
-export class InventoryColumn extends BaseDrawing {
+export class InventoryColumn extends Drawing {
     constructor(x, y, w, h, color) {
         super();
 
@@ -44,9 +45,9 @@ export class InventoryColumn extends BaseDrawing {
         var coinW = 365;
         var coinH = 40;
 
-        this.fillBackground(this.color, this.x, this.y, this.w, this.h);
+        this.drawFilledRectangleLoaded();
         this.drawBackground();
-        this.drawText("Inventory", "32pt Arial", "black", this.titleX + 50, this.titleY - 20);
+        drawText("Inventory", "32pt Arial", "black", this.titleX + 50, this.titleY - 20);
 
         this.drawCoin(document.getElementById("CopperCoin"), CurrencyDecorator.getCopperCoins(),
             this.coinX, this.copperCoinY, coinW, coinH);
@@ -86,7 +87,7 @@ export class InventoryColumn extends BaseDrawing {
     }
 
     drawBackground() {
-        this.drawImage(
+        drawImage(
             document.getElementById("Backpack"),
             0,
             0,
@@ -100,16 +101,10 @@ export class InventoryColumn extends BaseDrawing {
     }
 
     drawCoin(image, amount, x, y, w, h) {
-        this.ctx.fillStyle = "white";
-        this.ctx.fillRect(x, y, w, h);
+        drawFilledRectangle("white", x, y, w, h);
+        drawRectangle(3, "green", x, y, w, h);
 
-        this.ctx.beginPath();
-        this.ctx.lineWidth = 3;
-        this.ctx.strokeStyle = "green";
-        this.ctx.rect(x, y, w, h);
-        this.ctx.stroke();
-
-        this.ctx.drawImage(
+        drawImage(
             image,
             0,
             0,
@@ -121,22 +116,14 @@ export class InventoryColumn extends BaseDrawing {
             48
         );
 
-        this.ctx.font = "32pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText(amount, x + 48, y + 36);
+        drawText(amount, "32pt Arial", "black", x + 48, y + 36);
     }
 
     drawOre(amount, ix, iy, x, y, w, h) {
-        this.ctx.fillStyle = "white";
-        this.ctx.fillRect(x, y, w, h);
+        drawFilledRectangle("white", x, y, w, h);
+        drawRectangle(3, "green", x, y, w, h);
 
-        this.ctx.beginPath();
-        this.ctx.lineWidth = 3;
-        this.ctx.strokeStyle = "green";
-        this.ctx.rect(x, y, w, h);
-        this.ctx.stroke();
-
-        this.ctx.drawImage(
+        drawImage(
             document.getElementById("OreSpritesheet"),
             ix,
             iy,
@@ -148,22 +135,14 @@ export class InventoryColumn extends BaseDrawing {
             48
         );
 
-        this.ctx.font = "32pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText(amount, x + 48, y + 36);
+        drawText(amount, "32pt Arial", "black", x + 48, y + 36);
     }
 
     drawIngot(amount, ix, iy, x, y, w, h) {
-        this.ctx.fillStyle = "white";
-        this.ctx.fillRect(x, y, w, h);
+        drawFilledRectangle("white", x, y, w, h);
+        drawRectangle(3, "green", x, y, w, h);
 
-        this.ctx.beginPath();
-        this.ctx.lineWidth = 3;
-        this.ctx.strokeStyle = "green";
-        this.ctx.rect(x, y, w, h);
-        this.ctx.stroke();
-
-        this.ctx.drawImage(
+        drawImage(
             document.getElementById("OreSpritesheet"),
             ix,
             iy,
@@ -175,22 +154,14 @@ export class InventoryColumn extends BaseDrawing {
             48
         );
 
-        this.ctx.font = "32pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText(amount, x + 48, y + 36);
+        drawText(amount, "32pt Arial", "black", x + 48, y + 36);
     }
 
     drawWeapon(image, amount, x, y, w, h) {
-        this.ctx.fillStyle = "white";
-        this.ctx.fillRect(x, y, w, h);
+        drawFilledRectangle("white", x, y, w, h);
+        drawRectangle(3, "green", x, y, w, h);
 
-        this.ctx.beginPath();
-        this.ctx.lineWidth = 3;
-        this.ctx.strokeStyle = "green";
-        this.ctx.rect(x, y, w, h);
-        this.ctx.stroke();
-
-        this.ctx.drawImage(
+        drawImage(
             image,
             0,
             0,
@@ -202,22 +173,14 @@ export class InventoryColumn extends BaseDrawing {
             32
         );
 
-        this.ctx.font = "32pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText(amount, x + 48, y + 36);
+        drawText(amount, "32pt Arial", "black", x + 48, y + 36);
     }
 
     drawArmor(image, amount, x, y, w, h) {
-        this.ctx.fillStyle = "white";
-        this.ctx.fillRect(x, y, w, h);
+        drawFilledRectangle("white", x, y, w, h);
+        drawRectangle(3, "green", x, y, w, h);
 
-        this.ctx.beginPath();
-        this.ctx.lineWidth = 3;
-        this.ctx.strokeStyle = "green";
-        this.ctx.rect(x, y, w, h);
-        this.ctx.stroke();
-
-        this.ctx.drawImage(
+        drawImage(
             image,
             0,
             0,
@@ -229,8 +192,6 @@ export class InventoryColumn extends BaseDrawing {
             32
         );
 
-        this.ctx.font = "32pt Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText(amount, x + 48, y + 36);
+        drawText(amount, "32pt Arial", "black", x + 48, y + 36);
     }
 }

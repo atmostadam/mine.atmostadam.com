@@ -16,6 +16,8 @@ export class CopperIngot extends BaseIngot {
         if (this.hidden) {
             return;
         }
+        this.drawImageLoaded();
+        /*
         this.ctx.drawImage(
             this.image,
             this.ix,
@@ -27,6 +29,7 @@ export class CopperIngot extends BaseIngot {
             this.sw,
             this.sh
         );
+        */
     }
 
     stillLocked() {

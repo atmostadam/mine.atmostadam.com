@@ -1,6 +1,6 @@
-import { BaseClickable } from "./BaseClickable.js";
+import { Drawing } from "https://atmostadam.github.io/game-library/base/Drawing.js";
 
-export class BaseOre extends BaseClickable {
+export class BaseOre extends Drawing {
     constructor(ix, iy, x, y,) {
         super();
 

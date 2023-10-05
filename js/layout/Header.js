@@ -1,8 +1,9 @@
-import { BaseDrawing } from "../base/BaseDrawing.js";
+import { Drawing } from "https://atmostadam.github.io/game-library/base/Drawing.js";
 import { ScrollingTextHandler } from "../handler/ScrollingTextHandler.js";
-import { GameCache } from "../persistence/GameCache.js";
+import { GameContext } from "https://atmostadam.github.io/game-library/context/GameContext.js";
+import { drawText } from "https://atmostadam.github.io/game-library/util/DrawingUtils.js";
 
-export class Header extends BaseDrawing {
+export class Header extends Drawing {
     constructor(w, h, x, y) {
         super();
 
@@ -15,7 +16,7 @@ export class Header extends BaseDrawing {
         this.startX = 50;
         this.tx = this.startX;
         this.ty = 53;
-        this.endX = GameCache.getWidth() - 50;
+        this.endX = GameContext.getWidth() - 50;
 
         this.handler = new ScrollingTextHandler();
     }
@@ -29,9 +30,9 @@ export class Header extends BaseDrawing {
     }
 
     draw() {
-        this.fillBackground(this.color, this.x, this.y, this.w, this.h);
+        this.drawFilledRectangleLoaded();
         if (null != this.handler.text) {
-            this.drawText(this.handler.text, "46pt Arial", this.handler.textColor, this.tx, this.ty);
+            drawText(this.handler.text, "46pt Arial", this.handler.textColor, this.tx, this.ty);
             this.tx += 2;
         }
     }

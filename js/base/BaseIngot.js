@@ -1,7 +1,8 @@
-import { BaseClickable } from "./BaseClickable.js";
+import { Drawing } from "https://atmostadam.github.io/game-library/base/Drawing.js";
 
-export class BaseIngot extends BaseClickable {
-    constructor(
+export class BaseIngot extends Drawing {
+    constructor(ix, iy, x, y
+        /*
         ix,
         iy,
         x,
@@ -15,8 +16,12 @@ export class BaseIngot extends BaseClickable {
         tick,
         ticking,
         clickPower,
-        clickMultiplier) {
-        super(minClickX,
+        clickMultiplier
+        */
+    ) {
+        super(ix, iy, x, y
+            /*
+            minClickX,
             maxClickX,
             minClickY,
             maxClickY,
@@ -25,7 +30,9 @@ export class BaseIngot extends BaseClickable {
             tick,
             ticking,
             clickPower,
-            clickMultiplier);
+            clickMultiplier
+            */
+        );
 
         this.image = document.getElementById("OreSpritesheet");
         this.ix = ix;
@@ -38,6 +45,7 @@ export class BaseIngot extends BaseClickable {
         this.sh = 140;
     }
 
+    /*
     draw() {
         if (this.hidden) {
             return;
@@ -54,4 +62,5 @@ export class BaseIngot extends BaseClickable {
             this.sh
         );
     }
+    */
 }

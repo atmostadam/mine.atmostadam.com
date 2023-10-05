@@ -1,6 +1,6 @@
-import { BaseDrawing } from "../base/BaseDrawing.js";
+import { Drawing } from "https://atmostadam.github.io/game-library/base/Drawing.js";
 
-export class Footer extends BaseDrawing {
+export class Footer extends Drawing {
     constructor(w, h, x, y) {
         super();
 
@@ -17,7 +17,6 @@ export class Footer extends BaseDrawing {
     }
 
     draw() {
-        this.fillBackground(this.color, this.x, this.y, this.w, this.h);
-
+        this.drawFilledRectangleLoaded();
     }
 }
