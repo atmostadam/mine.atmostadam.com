@@ -30,7 +30,7 @@ export class Mine {
         this.canvas = canvas;
         this.ctx = ctx;
 
-        new GameContext(canvas, ctx);
+        //new GameContext(canvas, ctx);
 
         new HiddenStateStaticHandler();
         new ScrollingTextHandler();
